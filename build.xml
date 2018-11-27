@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project default="compile">
+    <path id="ot.classpath">
+        <pathelement path="H:/opengion_user/lib/*" />
+        <pathelement path="H:/opengion_user/apps/endorsed5.0/*" />
+    </path>
+
+    <target name="compile">
+        <mkdir dir="classes" />
+        <javac srcdir="src" destdir="classes" includeantruntime="false" />
+        <!-- <java classname="ot.Test" classpathref="classes" /> -->
+        <java classname="ot.Test" classpath="classes" classpathref="ot.classpath" />
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="target" />
+        <jar basedir="classes" jarfile="target/ot.jar" />
+    </target>
+
+    <target name="test">
+        <property environment="env" />
+        <property name="ot.classpath" refid="ot.classpath" />
+        <echo message="test start" />
+        <echo message="${env.TEST}" />
+        <echo message="${ot.classpath}" />
+    </target>
+</project>

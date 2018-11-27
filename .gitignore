@@ -1,0 +1,6 @@
+.vscode
+classes
+doc
+*.class
+*.jar
+target
