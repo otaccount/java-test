@@ -1,8 +1,11 @@
 <?xml version="1.0"?>
 <project>
-    <>
+    <path id="ot.classpath">
+        <pathelement path="C:/Users/opengion/work_git/java-test/target/*" />
+        <fileset dir="C:/Users/opengion/work_git/java-test/target" />
+    </path>
 
     <mkdir dir="classes" />
-    <javac srcdir="src" destdir="classes" />
-    <java classname="test01.Test01" classpath="classes" />
+    <javac srcdir="src" destdir="classes" classpathref="ot.classpath" />
+    <java classname="test01.Test01" classpath="classes" classpathref="ot.classpath" />
 </project>
