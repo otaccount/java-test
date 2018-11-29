@@ -4,3 +4,6 @@ doc
 *.class
 *.jar
 target
+.gradle
+build
+*.xlsx
