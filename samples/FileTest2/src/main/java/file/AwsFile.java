@@ -12,11 +12,14 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 
 public class AwsFile extends FileAbstract {
 	AmazonS3 client = null;
+	String BUCKETNAME = "s3testot";
 
 	public AwsFile() {
+		// proxy環境の場合は、ClientConfigurationを設定する
 		ClientConfiguration conf = new ClientConfiguration();
 		conf.setProtocol(Protocol.HTTPS);
 		conf.setProxyHost(System.getProperty("proxyHost"));
@@ -37,19 +40,24 @@ public class AwsFile extends FileAbstract {
 				.build();
 	}
 
+	/**
+	 * アップロード
+	 */
 	@Override
 	public void write(InputStream is, final String path) {
-		String bucketName = "s3testot";
 		ObjectMetadata om = new ObjectMetadata();
 
-		final PutObjectRequest putRequest = new PutObjectRequest(bucketName, path, is, om);
+		final PutObjectRequest putRequest = new PutObjectRequest(BUCKETNAME, path, is, om);
 
 		client.putObject(putRequest);
 	}
 
+	/**
+	 * ダウンロード
+	 */
 	@Override
 	public InputStream read(final String path) {
-
-		return null;
+		S3Object object = client.getObject(BUCKETNAME, path);
+		return object.getObjectContent();
 	}
 }

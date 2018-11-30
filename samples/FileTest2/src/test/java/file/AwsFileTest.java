@@ -5,6 +5,10 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,25 +23,23 @@ public class AwsFileTest {
 		file = new AwsFile();
 	}
 
-//	@Test
-//	public void test01{
-//		assertEquals(System.getProperty("test"), "test");
-//	}
-
 	@Test
-	public void testWrite() {
+	public void writeTest() {
 		try(InputStream is = new ByteArrayInputStream("テスト２です".getBytes())){
 			file.write(is, "folder/test.txt");
 		}catch(IOException ie) {
-			output(ie);
+			fail(ie.getMessage());
 		}
-//		fail("まだ実装されていません");
 	}
 
 	@Test
-	public void testTest01() {
-		assertEquals(System.getProperty("test"), "test");
-//		assertEquals(expected, actual);
+	public void readTest() {
+		try(InputStream is = file.read("folder/test.txt")){
+			Path target = Paths.get("test.txt");
+			Files.copy(is, target, StandardCopyOption.REPLACE_EXISTING);
+		}catch(IOException ie){
+			fail(ie.getMessage());
+		}
 	}
 
 	private void output(Object obj) {
