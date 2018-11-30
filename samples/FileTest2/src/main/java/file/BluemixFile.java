@@ -16,6 +16,7 @@ import com.ibm.cloud.objectstorage.services.s3.AmazonS3;
 import com.ibm.cloud.objectstorage.services.s3.AmazonS3ClientBuilder;
 import com.ibm.cloud.objectstorage.services.s3.model.ObjectMetadata;
 import com.ibm.cloud.objectstorage.services.s3.model.PutObjectRequest;
+import com.ibm.cloud.objectstorage.services.s3.model.S3Object;
 
 public class BluemixFile extends FileAbstract {
 	AmazonS3 client = null;
@@ -56,6 +57,8 @@ public class BluemixFile extends FileAbstract {
 	}
 
 	public void test() {
+		//InputStreamのサイズ計算？
+		//http://tomoyamkung.net/2014/03/27/java-inputstream-getsize/
 		client.createBucket("ottestbucket01");
 	}
 
@@ -76,9 +79,8 @@ public class BluemixFile extends FileAbstract {
 	 */
 	@Override
 	public InputStream read(final String path) {
-//		S3Object object = client.getObject(BUCKETNAME, path);
-//		return object.getObjectContent();
-		return null;
+		S3Object object = client.getObject(BUCKETNAME, path);
+		return object.getObjectContent();
 	}
 
 	// Null token returned by the Token Provider

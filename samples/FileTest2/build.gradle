@@ -36,6 +36,9 @@ dependencies {
 	compile group: 'com.ibm.cos', name: 'ibm-cos-java-sdk', version: '2.3.2'
 	// https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-shade-plugin
 	compile group: 'org.apache.maven.plugins', name: 'maven-shade-plugin', version: '3.1.0'
+
+	// https://mvnrepository.com/artifact/com.microsoft.azure/azure-storage
+	compile group: 'com.microsoft.azure', name: 'azure-storage', version: '8.0.0'
 }
 
 jar {
